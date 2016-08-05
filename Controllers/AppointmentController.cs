@@ -10,12 +10,14 @@ namespace Ajax.Controllers
     public class AppointmentController : Controller
     {
         // GET: Appointment
+/*  ajax does get only
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+*/
         public ActionResult Index(string id)
         {
             //            return View("Index", id);

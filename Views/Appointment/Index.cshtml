@@ -3,11 +3,16 @@
 
 @{
     ViewBag.Title = "Index";
+    AjaxOptions ajaxOpts = new AjaxOptions {
+        UpdateTargetId = "tabledata",
+        Url = Url.Action("AppointmentData")
+
+    };
 }
 
 <h4>Appointment List</h4>
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm(ajaxOpts))
 {
     <table>
         <thead>
@@ -27,3 +32,47 @@
     </p>
 }
 
+<table>
+    <thead>
+        <tr>
+            <th>Client Name</th>
+            <th>Appointment Date</th>
+        </tr>
+    </thead>
+    <tbody id="tabledata2">
+        <tr><td>one</td><td>two</td></tr>
+        <tr><td>three</td><td>four</td></tr>
+        <tr><td>five</td><td>six</td></tr>
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+    function OnBegin() {
+        alert("begin");
+    }
+
+    function OnFailure() {
+        alert("failure");
+    }
+    function OnSuccess() {
+        alert("success");
+    }
+    function OnComplete() {
+        alert("complete");
+    }
+
+</script>
+
+
+@Ajax.ActionLink("Test", "Index", new { id = "Joe" },
+    new AjaxOptions
+    {
+        UpdateTargetId = "tabledata2",
+        Url = Url.Action("AppointmentData", new { id = "Joe" }),
+        OnBegin = "OnBegin",
+        OnFailure = "OnFailure",
+        OnSuccess = "OnSuccess",
+        OnComplete = "OnComplete"
+    }
+    ) 
